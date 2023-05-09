@@ -62,5 +62,20 @@ namespace SparkyNUnitTest
             string result = grading.GetGrade();
             Assert.That(result, Is.EqualTo("F"));
         }
+
+        [Test]
+        [TestCase(95, 90, ExpectedResult = "A")]
+        [TestCase(85, 90, ExpectedResult = "B")]
+        [TestCase(65, 90, ExpectedResult = "C")]
+        [TestCase(95, 65, ExpectedResult = "B")]
+        [TestCase(95, 55, ExpectedResult = "F")]
+        [TestCase(65, 55, ExpectedResult = "F")]
+        [TestCase(50, 90, ExpectedResult = "F")]
+        public string GradingCalc_AlllGradeLoficalScenerios_GradeOutPut(int score, int attendance)
+        {
+            grading.Score = score;
+            grading.AttendancePercentage = attendance;
+            return grading.GetGrade();
+        }
     }
 }
